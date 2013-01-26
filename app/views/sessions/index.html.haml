@@ -1,0 +1,43 @@
+%h1 Listing sessions
+
+%table
+  %tr
+    %th Title
+    %th Abstract
+    %th Start
+    %th End
+    %th Room
+    %th Difficulty
+    %th Speaker name
+    %th Technology
+    %th Uri
+    %th Event type
+    %th Id
+    %th Session lookup
+    %th Speaker uri
+    %th
+    %th
+    %th
+
+  - @sessions.each do |session|
+    %tr
+      %td= session.title
+      %td= session.abstract
+      %td= session.start
+      %td= session.end
+      %td= session.room
+      %td= session.difficulty
+      %td= session.speaker_name
+      %td= session.technology
+      %td= session.uri
+      %td= session.event_type
+      %td= session.id
+      %td= session.session_lookup_id
+      %td= session.speaker_uri
+      %td= link_to 'Show', session
+      %td= link_to 'Edit', edit_session_path(session)
+      %td= link_to 'Destroy', session, method: :delete, data: { confirm: 'Are you sure?' }
+
+%br
+
+= link_to 'New Session', new_session_path

@@ -1,0 +1,45 @@
+%p#notice= notice
+
+%p
+  %b Title:
+  = @session.title
+%p
+  %b Abstract:
+  = @session.abstract
+%p
+  %b Start:
+  = @session.start
+%p
+  %b End:
+  = @session.end
+%p
+  %b Room:
+  = @session.room
+%p
+  %b Difficulty:
+  = @session.difficulty
+%p
+  %b Speaker name:
+  = @session.speaker_name
+%p
+  %b Technology:
+  = @session.technology
+%p
+  %b Uri:
+  = @session.uri
+%p
+  %b Event type:
+  = @session.event_type
+%p
+  %b Id:
+  = @session.id
+%p
+  %b Session lookup:
+  = @session.session_lookup_id
+%p
+  %b Speaker uri:
+  = @session.speaker_uri
+
+= link_to 'Edit', edit_session_path(@session)
+\|
+= link_to 'Back', sessions_path
