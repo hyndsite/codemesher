@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'rails', '3.2.11'
-
+gem 'bootstrap-sass'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
@@ -23,9 +23,14 @@ group :test, :development do
   gem 'rspec-rails'
   gem 'sqlite3'
   gem 'guard-rspec', '~> 1.2.1'
-  gem 'guard-spork', '~>1.2.0'
+  gem 'guard-spork', :github => 'guard/guard-spork'
   gem 'spork', '~> 0.9.2'
 end
+
+group :development do
+  gem 'annotate', '~> 2.5.0'
+end
+
 
 group :test  do
   gem 'capybara', '1.1.2'
@@ -38,7 +43,7 @@ group :production do
 end
 
 # To use ActiveModel has_secure_password
-# gem 'bcrypt-ruby', '~> 3.0.0'
+ gem 'bcrypt-ruby', '~> 3.0.0'
 
 # To use Jbuilder templates for JSON
 # gem 'jbuilder'

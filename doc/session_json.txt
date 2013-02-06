@@ -1,0 +1,15 @@
+{"Title":".NET TDD Immersion (Tuesday Half Day PM)","Abstract":"TDD Immersion covers everything you need to know to do test-driven development on real .NET projects. We'll go over stuff like how to write tests first, how to refactor your code to make it easier to test, mocking frameworks like Moq, dependency injection with StructureMap, and other TDD tips and tricks I've learned from doing TDD over the years.\n\nWe'll also walk through a sample ASP.NET MVC web app and show you how you might set up an actual project, work with ORMs and data access layers, set up your test projects, and make things easy to test.  We'll end with some TDD practice to help you hone your TDD skills, so bring your laptop (or pair up with someone who has one). TDD has revolutionized the way that I write code and it can do the same for you! \n","Start":"2013-01-08T18:30:00Z","End":"2013-01-08T22:30:00Z","Room":"Indigo","Difficulty":"Intermediate","SpeakerName":"Jon Kruger","Technology":".NET","URI":"/api/sessions.json/NET-TDD-Immersion-Tuesday-Half-Day-PM","EventType":"PreCompiler","Id":"a02b4998-bc99-49ae-8b3a-19c3598735eb","SessionLookupId":"NET-TDD-Immersion-Tuesday-Half-Day-PM","SpeakerURI":"/api/speakers.json/Jon-Kruger"}
+
+Title
+Abstract
+Start
+End
+Room
+Difficulty
+SpeakerName
+Technology
+URI
+EventType
+Id
+SessionLookupId
+SpeakerURI
