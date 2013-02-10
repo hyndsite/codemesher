@@ -1,7 +1,7 @@
 Codemesher::Application.routes.draw do
-  get "user/new"
+  resources :users
 
-  match '/signup', to: 'user#new'
+  match '/signup',  to: 'users#new'
   match '/help', to: 'static_pages#help'
   root :to => 'static_pages#help'
 
