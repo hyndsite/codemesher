@@ -23,16 +23,23 @@ describe "UserPages" do
       end
     end
 
-    describe "valid new user info submitted" do
+    describe "with valid user information" do
       before do
         fill_in "Name", with: "Mac Leman"
-        fill_in "Email", with: "sample@example.com"
+        fill_in "Email", with: "user@example.com"
         fill_in "Password", with: "hippo1"
         fill_in "Confirm", with: "hippo1"
       end
 
       it "should create a user" do
         expect { click_button submit }.to change(User, :count).by(1)
+      end
+
+      describe "after saving the user" do
+        before { click_button submit }
+        let(:user) {User.find_by_email("user@example.com")}
+
+        it { should have_link('sign-out', href: signout_path) }
       end
     end
 

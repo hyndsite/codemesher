@@ -23,6 +23,8 @@ describe User do
     should respond_to(:password_digest)
     should respond_to(:password)
     should respond_to(:password_confirmation)
+    should respond_to(:remember_token)
+    should respond_to(:authenticate)
   end
 
   it "should be valid" do
@@ -131,6 +133,12 @@ describe User do
 
       it {should be_invalid}
     end
+  end
+
+  #Save a remember token
+  describe "When the user is saved the Remember Token is not blank" do
+    before {@user.save}
+    its(:remember_token) { should_not be_blank}
   end
 
 end
