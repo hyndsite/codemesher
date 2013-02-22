@@ -51,4 +51,39 @@ describe "UserPages" do
       it { should have_selector("h1", text: user.name)}
     end
   end
+
+  describe "Edit" do
+    let(:user) {FactoryGirl.create(:user)}
+    before do
+      sign_in user
+      visit edit_user_path(user)
+    end
+
+    describe "pages" do
+      it {should have_selector("h3", text: "Update your profile")}
+      it {should have_link('change', href: 'http://gravatar.com/emails')}
+      it "email field should not be editable"
+    end
+
+    describe "with invalid information" do
+      before {click_button 'Save Changes'}
+      it {should have_content('error')}
+    end
+
+    describe "with valid information" do
+      let(:new_name) {"Fred Rogers"}
+      before do
+        fill_in "Name", with: new_name
+        fill_in "Email", with: user.email.downcase
+        fill_in "Password", with: user.password
+        fill_in "Confirm Password", with: user.password_confirmation
+        click_button "Save Changes"
+      end
+
+      it { should have_selector("title", content: app_title('Edit User'))}
+      it { should have_selector('div.alert.alert-success')}
+      it { should have_link('sign-out', href: signout_path)}
+      specify { user.reload.name == new_name}
+    end
+  end
 end
