@@ -48,7 +48,6 @@ describe "Authentication_Pages: " do
                     visit edit_user_path(user)
                     fill_in "Email", with: user.email.downcase
                     fill_in "Password", with: user.password
-                    fill_in "Confirm Password", with: user.password_confirmation
                     click_button "Sign in"
                   end
 
@@ -68,6 +67,11 @@ describe "Authentication_Pages: " do
                     before { put user_path(user)}
                     specify { response.should redirect_to(signin_path)}
                   end
+
+                  describe "visiting the user index page" do
+                    before {visit users_path}
+                    it { should have_selector('title', text: app_title("Sign-in"))}
+                  end
               end
           end
 
@@ -85,7 +89,7 @@ describe "Authentication_Pages: " do
             describe "submitting a PUT request to Users#update action" do
               before {put user_path(wrong_user)}
 
-               specify {response.should redirect_to(root_path)}
+              specify {response.should redirect_to(root_path)}
             end
           end
       end
