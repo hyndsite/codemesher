@@ -24,7 +24,7 @@ gem 'jquery-rails'
 
 group :test, :development do
   gem 'rspec-rails'
-  gem 'sqlite3'
+  #gem 'sqlite3'
   gem 'guard-rspec', '~> 1.2.1'
   gem 'guard-spork', :github => 'guard/guard-spork'
   gem 'spork', '~> 0.9.2'
@@ -43,8 +43,8 @@ group :test  do
   gem 'factory_girl_rails', '~>4.1.0'
 end
 
-group :production do
-  gem 'pg', '0.12.2'
+group :test, :development, :production do
+  gem 'pg'
 end
 
 # To use ActiveModel has_secure_password

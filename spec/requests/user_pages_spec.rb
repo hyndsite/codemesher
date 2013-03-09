@@ -4,7 +4,7 @@ describe "UserPages" do
   subject { page }
 
   describe "Index page" do
-    let(:user) {FactoryGirl.create(:user)}
+    let(:user) {FactoryGirl.create(:attendee)}
 
     before(:each) do
       sign_in user
@@ -19,22 +19,24 @@ describe "UserPages" do
 
         it {should have_selector 'div.pagination'}
         it "should list each user" do
-          User.paginate(page: 1).each do |user|
+            User.paginate(page: 1).each do |user|
             page.should have_selector('li', text: user.name)
           end
         end
     end
   end
 
+  #Sign up
   describe "signup page" do
     before { visit signup_path}
     let(:submit) {"Create an account"}
 
-    it "should have header subjectign-up" do
+    it "should have header sign-up" do
       should have_selector("h1", text: "Sign-up")
       should have_selector("title", text: "CodeMesher:  Mesh your CodeMash Experience | Sign-up")
     end
 
+    #Failure
     describe "invalid information for new user" do
       it "should not create a new user" do
         expect { click_button submit }.not_to change(User, :count).by(1)
@@ -46,6 +48,7 @@ describe "UserPages" do
       end
     end
 
+    #Valid
     describe "with valid user information" do
       before do
         fill_in "Name", with: "Mac Leman"
@@ -63,6 +66,7 @@ describe "UserPages" do
         let(:user) {User.find_by_email("user@example.com")}
 
         it { should have_link('sign-out', href: signout_path) }
+
       end
     end
 

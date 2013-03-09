@@ -14,5 +14,10 @@ namespace :db do
                                password: password,
                                password_confirmation: password)
         end
+
+        roles = %w[admin attendee]
+        roles.each do |role|
+            Role.create!(name: role)
+        end
     end
 end

@@ -16,6 +16,10 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(params[:user])
+    role = Role.find_by_name(:attendee)
+    if (role )
+      @user.roles << role unless @user.roles.include?(role)
+    end
 
     if @user.save
       sign_in @user

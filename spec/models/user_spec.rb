@@ -2,19 +2,21 @@
 #
 # Table name: users
 #
-#  id         :integer          not null, primary key
-#  name       :string(255)
-#  email      :string(255)
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
+#  id              :integer          not null, primary key
+#  name            :string(255)
+#  email           :string(255)
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#  password_digest :string(255)
+#  remember_token  :string(255)
 #
 
 require 'spec_helper'
 
 describe User do
 
-  before { @user = User.new(email: "example@email.com", name: "Some User",
-                                            password: "fizzle", password_confirmation: "fizzle") }
+  before {@user = FactoryGirl.create(:attendee)}
+
   subject { @user }
 
   it "Should respond to all fields" do
@@ -25,6 +27,7 @@ describe User do
     should respond_to(:password_confirmation)
     should respond_to(:remember_token)
     should respond_to(:authenticate)
+    should respond_to(:roles)
   end
 
   it "should be valid" do
@@ -74,12 +77,12 @@ describe User do
 
   describe "when an email already exists" do
     before do
-      user_with_same_email = @user.dup
-      user_with_same_email.email = @user.email.upcase
-      user_with_same_email.save
+      @user_with_same_email = @user.dup
+      @user_with_same_email.email = @user.email.upcase
+      @user_with_same_email.save
     end
 
-      it { should_not be_valid }
+      specify { @user_with_same_email.should_not be_valid }
   end
 
   describe "value of email when saved" do
@@ -141,4 +144,14 @@ describe User do
     its(:remember_token) { should_not be_blank}
   end
 
+  #Users Role
+  describe "when saved " do
+
+    describe "should have attendee role" do
+      let(:attendee_role) {Role.find_by_name(:attendee)}
+      let(:attendee_user) {FactoryGirl.create(:attendee)}
+
+      specify { attendee_user.roles.should include(attendee_role)}
+    end
+  end
 end

@@ -1,7 +1,8 @@
 Codemesher::Application.routes.draw do
+  resources :groups
   resources :users
-  resources :sessions, only: ['create', 'destroy', 'new'
-  ]
+  resources :sessions, only: ['create', 'destroy', 'new']
+
   match '/signup',  to: 'users#new'
   match '/signin', to: 'sessions#new'
   match '/signout', to: 'sessions#destroy', via: :delete
