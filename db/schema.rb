@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130308234038) do
+ActiveRecord::Schema.define(:version => 20130501223621) do
 
   create_table "groups", :force => true do |t|
     t.string   "name"
@@ -24,8 +24,10 @@ ActiveRecord::Schema.define(:version => 20130308234038) do
   create_table "memberships", :force => true do |t|
     t.integer  "user_id"
     t.integer  "group_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
+    t.boolean  "owner",       :default => false, :null => false
+    t.boolean  "contributor", :default => false, :null => false
   end
 
   add_index "memberships", ["user_id"], :name => "index_memberships_on_user_id"
@@ -37,6 +39,31 @@ ActiveRecord::Schema.define(:version => 20130308234038) do
   end
 
   add_index "roles", ["name"], :name => "index_roles_on_name", :unique => true
+
+  create_table "sessions", :force => true do |t|
+    t.string   "abstract"
+    t.datetime "finish"
+    t.string   "level"
+    t.string   "room"
+    t.datetime "start"
+    t.string   "title"
+    t.string   "track"
+    t.integer  "speaker_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "sessions", ["speaker_id"], :name => "index_sessions_on_speaker_id"
+
+  create_table "speakers", :force => true do |t|
+    t.text     "biography"
+    t.string   "blog_url"
+    t.string   "email_address"
+    t.string   "name"
+    t.string   "twitter"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
 
   create_table "user_roles", :force => true do |t|
     t.integer  "user_id"

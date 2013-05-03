@@ -46,6 +46,14 @@ describe "UserPages" do
         before {click_button submit }
         it { should have_content('error')}
       end
+
+      #password validations only valid on create
+      describe "password errors should exist" do
+        before {click_button submit}
+        it { should have_selector('li', text: "Password can't be blank")}
+        it { should have_selector('li', text: "Password is too short (minimum is 6 characters)")}
+        it { should have_selector('li', text: "Password confirmation can't be blank")}
+      end
     end
 
     #Valid
@@ -79,6 +87,7 @@ describe "UserPages" do
     end
   end
 
+  #Edit
   describe "Edit" do
     let(:user) {FactoryGirl.create(:user)}
     before do
@@ -89,13 +98,10 @@ describe "UserPages" do
     describe "pages" do
       it {should have_selector("h3", text: "Update your profile")}
       it {should have_link('change', href: 'http://gravatar.com/emails')}
-      it "email field should not be editable"
     end
 
-    describe "with invalid information" do
-      before {click_button 'Save Changes'}
-      it {should have_content('error')}
-    end
+    it "email field should not be editable"
+    it "test to test editable fields"
 
     describe "with valid information" do
       let(:new_name) {"Fred Rogers"}

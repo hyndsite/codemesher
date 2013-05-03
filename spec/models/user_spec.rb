@@ -96,23 +96,9 @@ describe User do
     end
   end
 
-  #Password
-  describe "when password is not present" do
-    before { @user.password = @user.password_confirmation = " " }
-    it { should_not be_valid }
-  end
+  #Password Validations
+  # Tested in the User Pages Spec on Creation (when its only valid)
 
-  describe "when password doesn't match confirmation" do
-    before { @user.password_confirmation = "different_password" }
-
-    it { should_not be_valid }
-  end
-
-  describe "when password_confirmation is nil" do
-    before { @user.password_confirmation = nil}
-
-    it { should_not be_valid }
-  end
 
   #Authentication
   it { should respond_to(:authenticate) }
@@ -131,11 +117,7 @@ describe User do
       specify { user_for_invalid_password.should be_false }
     end
 
-    describe "with a password that is to short" do
-      before { @user.password = @user.password_confirmation = "M" * 5}
-
-      it {should be_invalid}
-    end
+    it "test for validation on updating password"
   end
 
   #Save a remember token

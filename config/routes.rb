@@ -1,11 +1,11 @@
 Codemesher::Application.routes.draw do
   resources :groups
   resources :users
-  resources :sessions, only: ['create', 'destroy', 'new']
+  resources :user_sessions, only: ['create', 'destroy', 'new']
 
   match '/signup',  to: 'users#new'
-  match '/signin', to: 'sessions#new'
-  match '/signout', to: 'sessions#destroy', via: :delete
+  match '/signin', to: 'user_sessions#new'
+  match '/signout', to: 'user_sessions#destroy', via: :delete
   match '/help', to: 'static_pages#help'
   root :to => 'static_pages#help'
 

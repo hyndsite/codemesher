@@ -1,3 +1,13 @@
+# == Schema Information
+#
+# Table name: groups
+#
+#  id         :integer          not null, primary key
+#  name       :string(255)
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+
 require 'spec_helper'
 
 describe Group do
@@ -33,11 +43,25 @@ describe Group do
 
   describe "does not allow duplicates" do
     before do
+      @group.save
       @group_with_same_name = @group.dup
       @group_with_same_name.save
     end
 
-    it {should_not be_valid}
+    it {@group_with_same_name.should_not be_valid}
+  end
+
+  #invalid group
+  #valid characters $[a-Z, 1-9, -_+.]^
+  describe "with invalid name" do
+    it "should be invalid" do
+      names = %w[! @ # $ % ^ & * ( ) = < > ? / \[ \] \\ | ].map {|x| "with#{x}"}
+
+      names.each do |name|
+        @group.name = name
+        @group.should_not be_valid
+      end
+    end
   end
 
   describe "with valid name" do
@@ -45,4 +69,5 @@ describe Group do
 
     it {should be_valid}
   end
+
 end
